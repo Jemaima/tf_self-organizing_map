@@ -3,7 +3,7 @@ import tensorflow as tf
 
 
 class SOMNetwork():
-    def __init__(self, inp_dim, dim=3, sigma=None, l_r=0.5, min_lr=0.001, tau2=100000, dtype=tf.float32):
+    def __init__(self, inp_dim, dim=3, sigma=None, l_r=0.5, min_lr=0.001, tau2=1000000, dtype=tf.float32):
         if not sigma:
             sigma = dim / 2
         self.dtype = dtype
