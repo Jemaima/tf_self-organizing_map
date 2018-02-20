@@ -4,7 +4,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 initial_dim = 5
-som = SOM(3, initial_dim, sigma=initial_dim / 2, min_lr=0.01)
+som = SOM(3, initial_dim, sigma=initial_dim , min_lr=0.01)
 x_test = np.random.uniform(0, 1, (initial_dim * initial_dim, 3))
 
 train_op = som.train_op()
@@ -25,10 +25,15 @@ with tf.Session() as sess:
     plt.figure()
     plt.subplot(2, 2, 1)
     plt.imshow(np.reshape(x_test, [initial_dim, initial_dim, 3]))
+    plt.title('Random colors')
     plt.subplot(2, 2, 2)
     plt.imshow(np.reshape(sess.run(som.w), [som.dim.eval(), som.dim.eval(), 3]))
+    plt.title('Sorted colors')
     plt.subplot(2, 2, 3)
+    plt.title('Color sample')
     plt.imshow(np.ones((initial_dim, initial_dim, 3)) * color_data)
     plt.subplot(2, 2, 4)
+    plt.title('Its place on map')
     plt.imshow((np.reshape(a[1], [som.dim.eval(), som.dim.eval()])))
+    plt.tight_layout(1,1,1)
     plt.show(block=True)

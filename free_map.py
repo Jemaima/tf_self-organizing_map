@@ -3,8 +3,12 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
-som = SOM(3, 10, sigma=20)
-x_test = np.random.uniform(0, 1, (100000, 3))
+map_size = 10
+sigma = 20
+n_samples = 100000
+
+som = SOM(3, map_size, sigma=sigma)
+x_test = np.random.uniform(0, 1, (n_samples, 3))
 
 train_op = som.train_op()
 init = tf.global_variables_initializer()
@@ -18,6 +22,7 @@ with tf.Session() as sess:
     plt.figure()
     plt.imshow( np.reshape(sess.run(som.w), [som.dim.eval(), som.dim.eval(), 3]))
     plt.show(block=False)
+
     plt.figure()
     plt.imshow((np.reshape(a[1], [som.dim.eval(), som.dim.eval()])))
     plt.show()
